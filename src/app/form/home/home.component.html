@@ -1,0 +1,123 @@
+<!-- <app-steps [steps]="steps"></app-steps> -->
+<div class="row mTop10">
+  <div class="col-md-12 col-lg-12">
+
+    <div class="secondary-tabs ">
+
+      <ul class="tabs st">
+        <li id="tab-dashboard" class="tab active">
+          <a>
+            <div class="tab__heading text-large" title="Home">Update & Process</div>
+          </a>
+        </li>
+        <li id="tab-review" class="tab ">
+          <a>
+            <div class="tab__heading text-large" title="Performance">Summary</div>
+          </a>
+        </li>
+
+
+      </ul>
+
+      <div class="tab-content">
+        <div id="tab-dashboard-content" class="tab-pane active">
+          <div>
+
+            <div class="row mTop10">
+              <div class="col-md-12 col-lg-12">
+                <h3>Bulk File Upload</h3>
+              </div>
+            </div>
+
+            <div class="row mTop10">
+              <div class="col-md-12 col-lg-12">
+                <span class="text-large mR20">Browse Files</span>
+                <span class="icon-info icon-tiny info-color"></span>
+                <span class="text-small"> Files older than 30 days</span>
+              </div>
+            </div>
+
+            <div class="row">
+
+              <div class="col-md-9  col-lg-8">
+                <input #uploadfile id="uploadfile" name="uploadfile" class="custom-file-input" type="file" (change)="fileChangeEvent($event)" placeholder="Upload a file..."
+                  multiple/>
+              </div>
+              <div class="col-md-3 col-lg-4">
+                <button type="button" class="btn btn--primary m5" (click)="upload()">Upload</button>
+                <button class="btn" (click)="reset()" >Cancel</button>
+              </div>
+
+            </div>
+            <div class="row mTop25">
+              <div class="col-md-12 col-lg-12">
+                <div>
+                  <span class="text-medium text-bold">Uploaded Files</span>
+                </div>
+                <div class="responsive-table">
+                  <table class="table table--bordered table--loose table--hover table--nostripes">
+                    <thead>
+                      <tr class="greyBg">
+                        <th>
+                          <label class="checkbox">
+                            <input type="checkbox" />
+                            <span class="checkbox__input"></span>
+                          </label>
+                        </th>
+                        <th>File Name</th>
+                        <th>Uploaded by</th>
+                        <th>Date of Upload</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="ht55" *ngFor="let file of files">
+                        <td>
+                          <label class="checkbox">
+                            <input type="checkbox" />
+                            <span class="checkbox__input"></span>
+                          </label>
+                        </td>
+                        <td>
+                          <a href="#">{{file.filename}}</a>
+                        </td>
+                        <td>{{file.uploaded_by}}</td>
+                        <td>{{file.date_of_upload}}</td>
+                        <td [ngClass]="{
+                          'text-secondary':file.status === 'To be Processed',
+                          'text-danger':file.status === 'Process Failed'
+                        }">{{file.status}}</td>
+                        <td class="cm_align blueCol">
+                          <span class="icon-presence-end icon-small"></span>
+                        </td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="row mTop10">
+              <div class="col-md-12">
+
+                <div class="cm_align">
+                  <button class="btn btn--primary m5">Process Selected</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+        <div id="tab-review-content" class="tab-pane ">
+          <app-summary-page></app-summary-page>
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+</div>

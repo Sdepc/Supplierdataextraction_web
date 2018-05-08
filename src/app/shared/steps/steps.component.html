@@ -1,0 +1,16 @@
+<div class="row mTop15">
+  <div class="col-md-5">
+    <div class="ui-steps" [ngClass]="{'ui-steps--vertical': vertical}">
+      <div *ngFor="let step of steps" class="ui-step" [ngClass]="{'visited': step.visited, 'active': step.active, 'ui-step--alt': alt}">
+        <div class="step__icon {{step.class}}" [ngClass]="{'step__icon--small': small}">{{step.number}}</div>
+        <div class="step__label" *ngIf="step.label">{{step.label}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-7 ">
+    <div class="purgebutton">
+      <button class="btn btn-pbStyle"><span class="icon-trash icon-medium"></span> PURGE</button><br>
+      <span class="icon-info icon-small info-color"></span><span> Files older than 30 days</span>
+    </div>
+  </div>
+</div>
