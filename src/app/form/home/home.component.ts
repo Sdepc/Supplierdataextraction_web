@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
     for (let i = 0; i < files.length; i++) {
       formData.append("uploads[]", files[i], files[i]['name']);
     }
+    console.log('pardhu'+formData)
     this.fservice.filesUpload(formData).subscribe(data => {
       alert('File(s) uploaded successfully')
       this.reset();
