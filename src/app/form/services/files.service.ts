@@ -11,10 +11,11 @@ export class FilesService {
   constructor(private http: HttpClient) { }
 
   public getFiles() {
-    return this.http.get("./assets/api/files.json")
+	  let url = `${this.API_URL}/files/getfilescontent`;
+    return this.http.get(url);
   }
   public filesUpload(postdata) {
-    let url = `${this.API_URL}/files/upload`;
+    let url = `${this.API_URL}/files/upload?username=pardhu`;
     return this.http.post(url, postdata);
   }
 }

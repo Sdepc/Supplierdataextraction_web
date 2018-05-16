@@ -14,8 +14,12 @@ export class HomeComponent implements OnInit {
   constructor(private fservice: FilesService, private http: HttpClient) { }
 
   ngOnInit() {
-    this.fservice.getFiles().subscribe(data => {
-      this.files = data;
+   this.getAllFiles();
+  }
+  getAllFiles(){
+	  console.log('all file');
+	   this.fservice.getFiles().subscribe(data => {
+       this.files = data.files;
     });
   }
   upload() {
@@ -28,6 +32,7 @@ export class HomeComponent implements OnInit {
     this.fservice.filesUpload(formData).subscribe(data => {
       alert('File(s) uploaded successfully')
       this.reset();
+	  this.getAllFiles();
     });
   }
 

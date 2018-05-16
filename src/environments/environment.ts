@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   // URL of development API
-  apiUrl: 'https://pardhudemo.herokuapp.com'
+  apiUrl: 'http://localhost:3000'
 };
