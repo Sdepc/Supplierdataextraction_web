@@ -7,9 +7,9 @@ import { FilesService } from '../services/files.service';
   styleUrls: ['./summary-page.component.css']
 })
 export class SummaryPageComponent implements OnInit {
-
+  Contentdata: any;
   AllContracts: any;
-  constructor(private fservice:FilesService) { }
+  constructor(private fservice: FilesService) { }
 
   ngOnInit() {
     this.getAllContracts();
@@ -17,7 +17,15 @@ export class SummaryPageComponent implements OnInit {
   getAllContracts() {
     this.fservice.getAllContracts().subscribe(data => {
       this.AllContracts = data;
-      console.log(this.AllContracts)
+      this.getContentdata(this.AllContracts[0])
     });
+  }
+  liClicked(data) {
+    console.log(data);
+    this.getContentdata(data)
+
+  }
+  getContentdata(value) {
+    this.Contentdata = value;
   }
 }

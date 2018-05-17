@@ -19,7 +19,7 @@
 <div class="mTop15">
     <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all ui-tabs-vertical">
         <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
-            <li *ngFor="let Contract of AllContracts;let i = index;let firstItem = first;" id="tab-{{i}}" class="ui-state-default ui-corner-top vtabs" [ngClass]="{ 'ui-tabs-active ui-state-active vactive': firstItem }" 
+            <li *ngFor="let Contract of AllContracts;let i = index;let firstItem = first;" (click)="liClicked(Contract)" id="tab-{{i}}" class="ui-state-default ui-corner-top vtabs" [ngClass]="{ 'ui-tabs-active ui-state-active vactive': firstItem }" 
                 role="tab" tabindex="0" aria-controls="tabs-1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true">
                 <a class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">
                     <label class="checkbox">
@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="pull-left">
-                            <div>Contract and Discount Summary</div>
+                            <div><b>Contract and Discount Summary</b></div>
                         </div>
                         <div class="pull-right legends">
                             <div class="blueLegend mR20"></div>
@@ -46,7 +46,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        {{Contract}}
+                        {{Contentdata}}
                     </div>
                 </div>
             </div>
