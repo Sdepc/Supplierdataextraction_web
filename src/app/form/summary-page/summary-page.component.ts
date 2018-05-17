@@ -26,6 +26,10 @@ export class SummaryPageComponent implements OnInit {
 
   }
   getContentdata(value) {
-    this.Contentdata = value;
+    this.fservice.getContractdata(value).subscribe(result => {
+      console.log(result["Data"])
+      this.Contentdata = result["Data"];
+    });
+    
   }
 }
