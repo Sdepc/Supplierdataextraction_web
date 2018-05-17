@@ -30,8 +30,8 @@
                 </a>
             </li>
         </ul>
-        <div *ngFor="let Contract of AllContracts;let i = index;">
-            <div id="tab-{{i}}-vcontent" aria-labelledby="ui-id-1" class=" ui-tabs-panel ui-widget-content ui-corner-bottom vtab-pane vactive"
+        <div *ngFor="let Contract of AllContracts;let i = index;let firstItem = first;">
+            <div id="tab-{{i}}-vcontent" aria-labelledby="ui-id-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom vtab-pane vactive" [ngClass]="{ 'vactive': firstItem }"
                 role="tabpanel" aria-hidden="false">
                 <div class="row">
                     <div class="col-md-12">
@@ -46,7 +46,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                            <div [innerHTML]="Contentdata"></div>
+                            <div class="vsContent" [innerHTML]="Contentdata"></div>
                     </div>
                 </div>
             </div>
