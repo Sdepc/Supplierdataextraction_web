@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FilesService } from '../services/files.service';
 
 @Component({
   selector: 'app-summary-page',
@@ -7,25 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SummaryPageComponent implements OnInit {
 
-  constructor() { }
+  AllContracts: any;
+  constructor(private fservice:FilesService) { }
 
   ngOnInit() {
+    this.getAllContracts();
   }
-  steps = [
-    {
-      "number": 1,
-      "label": "Upload",
-      "active": true
-    },
-    {
-      "number": 2,
-      "label": "Process",
-      "active": true
-    },
-    {
-      "number": 3,
-      "label": "Summary Output",
-      "active": true
-    }
-  ];
+  getAllContracts() {
+    this.fservice.getAllContracts().subscribe(data => {
+      this.AllContracts = data;
+      console.log(this.AllContracts)
+    });
+  }
 }

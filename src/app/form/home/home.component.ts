@@ -8,31 +8,33 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  files: any;
   @ViewChild('uploadfile') myInputVariable: ElementRef;
   filesToUpload: Array<File> = [];
-  files: any;
+  
   constructor(private fservice: FilesService, private http: HttpClient) { }
 
   ngOnInit() {
-   this.getAllFiles();
+    this.getAllFiles();
   }
-  getAllFiles(){
-	  console.log('all file');
-	   this.fservice.getFiles().subscribe(data => {
-       this.files = data.files;
+  getAllFiles() {
+    console.log('all file');
+    this.fservice.getFiles().subscribe(data => {
+      this.files = data["files"];
     });
   }
+ 
   upload() {
     const formData: any = new FormData();
     const files: Array<File> = this.filesToUpload;
     for (let i = 0; i < files.length; i++) {
       formData.append("uploads[]", files[i], files[i]['name']);
     }
-    console.log('pardhu'+formData)
+    console.log('pardhu' + formData)
     this.fservice.filesUpload(formData).subscribe(data => {
       alert('File(s) uploaded successfully')
       this.reset();
-	  this.getAllFiles();
+      this.getAllFiles();
     });
   }
 

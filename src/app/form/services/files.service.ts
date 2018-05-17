@@ -14,6 +14,10 @@ export class FilesService {
 	  let url = `${this.API_URL}/files/getfilescontent`;
     return this.http.get(url);
   }
+  public getAllContracts() {
+	  let url = `${this.API_URL}/summary/contractnames`;
+    return this.http.get(url);
+  }
   public filesUpload(postdata) {
     let url = `${this.API_URL}/files/upload?username=pardhu`;
     return this.http.post(url, postdata);
