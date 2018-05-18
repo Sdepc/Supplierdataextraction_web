@@ -26,4 +26,8 @@ export class FilesService {
     let url = `${this.API_URL}/files/upload?username=pardhu`;
     return this.http.post(url, postdata);
   }
+  public purge(data,days) {
+    let url = `${this.API_URL}/summary/purge?days=`+days;
+    return this.http.post(url, data);
+  }
 }

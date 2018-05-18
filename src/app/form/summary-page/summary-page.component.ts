@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren } from '@angular/core';
 import { FilesService } from '../services/files.service';
 
 @Component({
@@ -7,8 +7,11 @@ import { FilesService } from '../services/files.service';
   styleUrls: ['./summary-page.component.css']
 })
 export class SummaryPageComponent implements OnInit {
+  ckbpurge = false;
   Contentdata: any;
   AllContracts: any;
+  selectedIds = [];
+  @ViewChildren('myItem') item;
   constructor(private fservice: FilesService) { }
 
   ngOnInit() {
@@ -21,14 +24,28 @@ export class SummaryPageComponent implements OnInit {
     });
   }
   liClicked(data) {
-    console.log(data);
     this.getContentdata(data)
-
   }
   getContentdata(value) {
     this.fservice.getContractdata(value).subscribe(result => {
       //console.log(result["Data"])
       this.Contentdata = result["Data"];
+    });
+
+  }
+  OnCheckboxSelect(id, event) {
+    if (event.target.checked === true) {
+      this.selectedIds.push({ name: id });
+    }
+    if (event.target.checked === false) {
+      this.selectedIds = this.selectedIds.filter((item) => item.name !== id);
+    }
+  }
+  purge() {
+    console.log(this.ckbpurge);
+    console.log(this.selectedIds)
+    this.fservice.purge(this.selectedIds,this.ckbpurge).subscribe(result => {
+     console.log(result)
     });
     
   }

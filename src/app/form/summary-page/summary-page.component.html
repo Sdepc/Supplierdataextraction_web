@@ -4,11 +4,11 @@
     </div>
     <div class="col-md-7">
         <div class="purgebutton">
-            <button class="btn btn-pbStyle">
+            <button class="btn btn-pbStyle" (click)="purge()">
                 <span class="icon-trash icon-medium"></span> PURGE</button>
             <br>
             <label class="checkbox">
-                <input type="checkbox" name="checkbox1">
+                <input type="checkbox" name="ckbpurge" [(ngModel)]="ckbpurge" >
                 <span class="checkbox__input"></span>
                 <span class="checkbox__label">Files older than 30 days</span>
             </label>
@@ -26,7 +26,7 @@
                 <div class="flex-inline">
                     <div>
                         <label class="checkbox">
-                            <input type="checkbox" name="checkbox6">
+                            <input type="checkbox" name="item-{{Contract}}" #myItem (change)="OnCheckboxSelect(Contract, $event)">
                             <span class="checkbox__input"></span>
                         </label>
                     </div>

@@ -7,11 +7,13 @@ import { SharedModule } from '../shared';
 import { FilesService } from './services/files.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from "@angular/common";
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
+    FormsModule,
     HttpClientModule,
     FormRoutingModule,
   ],
