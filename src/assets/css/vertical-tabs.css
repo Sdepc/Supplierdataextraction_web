@@ -26,10 +26,12 @@
 	font-size:smaller;
 	background: transparent;
 	width:96%;
+	padding:8px 0px;
 }
 
 .ui-tabs-vertical .ui-tabs-nav li:first-child {
 	margin-top:0px !important;
+	padding:8px 0px;
 }
 
 
@@ -50,8 +52,8 @@
 	background: #ffffff !important;
 	border-left: 4px solid #049fd9;
     border-radius: 0px;
-	padding: 5px 0px;
-	width:101%;
+	padding: 8px 0px;
+	width:100.5%;
 }
 .ui-tabs-vertical .ui-tabs-nav li:last-child {
 	margin-bottom: 0px;
@@ -65,5 +67,5 @@
 	/* min-height: 430px;
 	max-height: 430px; */
 	 /* height: auto;  */
-	 height: 853px;/* /**/
+	 height: 928px;/* /**/
 }
