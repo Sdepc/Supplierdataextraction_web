@@ -42,11 +42,13 @@ export class SummaryPageComponent implements OnInit {
     }
   }
   purge() {
-    console.log(this.ckbpurge);
-    console.log(this.selectedIds)
-    this.fservice.purge(this.selectedIds,this.ckbpurge).subscribe(result => {
-     console.log(result)
+    this.fservice.purge(this.selectedIds, this.ckbpurge).subscribe(result => {
+      console.log(result['Message'])
+      if (result['Message'] == 'Sucessfully deleted files') {
+        alert('Sucessfully deleted files')
+        this.getAllContracts();
+      }
     });
-    
+
   }
 }
