@@ -19,14 +19,19 @@
 <div class="mTop15">
     <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all ui-tabs-vertical">
         <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+           
             <li *ngFor="let Contract of AllContracts;let i = index;let firstItem = first;" (click)="liClicked(Contract)" id="tab-{{i}}" class="ui-state-default ui-corner-top vtabs" [ngClass]="{ 'ui-tabs-active ui-state-active vactive': firstItem }" 
                 role="tab" tabindex="0" aria-controls="tabs-1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true">
+                <label class="checkbox">
+                <input type="checkbox" name="checkbox6">
+                <span class="checkbox__input"></span>
+            </label>
                 <a class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">
-                    <label class="checkbox">
-                        <input type="checkbox" name="checkbox6">
-                        <span class="checkbox__input"></span>
+                  
+                       
+                       
                         <span class="checkbox__label">{{Contract}}</span>
-                    </label>
+                   
                 </a>
             </li>
         </ul>
@@ -39,8 +44,8 @@
                             <div><b>Contract and Discount Summary</b></div>
                         </div>
                         <div class="pull-right legends">
-                            <div class="blueLegend mR20"></div>
-                            <div class="greenLegend"></div>
+                            <div class="blueLegend qtr-padding-right"></div><div class="qtr-padding-left" >Contract Info</div>
+                             <div class="greenLegend half-padding-right half-margin-left"></div><div class="qtr-padding-left">Legend Info</div>
                         </div>
                     </div>
                 </div>
