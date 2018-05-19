@@ -18,9 +18,14 @@ export class SummaryPageComponent implements OnInit {
     this.getAllContracts();
   }
   getAllContracts() {
+    this.AllContracts=[];
     this.fservice.getAllContracts().subscribe(data => {
       this.AllContracts = data;
+      console.log(this.AllContracts);
+      //undefined
+      if(this.AllContracts.length > 0){
       this.getContentdata(this.AllContracts[0])
+      }
     });
   }
   liClicked(data) {
