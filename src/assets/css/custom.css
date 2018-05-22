@@ -14,13 +14,14 @@
     text-align: right;
     
 }
-.btn-pbStyle{
+
+.pb-color{
     background: #f5a623 !important;
-    border-radius: 6px !important;
+/*    
     font-weight: 500 !important;
     padding: 5px 35px !important;
     height: 100% !important;
-    font-size: 20px!important;
+    font-size: 20px!important; */
 }
 
 .info-color {
