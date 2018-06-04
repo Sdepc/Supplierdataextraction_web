@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
   files: any;
   @ViewChild('uploadfile') myInputVariable: ElementRef;
   filesToUpload: Array<File> = [];
-  
+  selectedIds = [];
   constructor(private fservice: FilesService, private http: HttpClient) { }
 
   ngOnInit() {
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
       this.files = data["files"];
     });
   }
- 
+
   upload() {
     const formData: any = new FormData();
     const files: Array<File> = this.filesToUpload;
@@ -44,5 +44,23 @@ export class HomeComponent implements OnInit {
   }
   reset() {
     this.myInputVariable.nativeElement.value = '';
+  }
+  OnCheckboxSelect(fileinfo, event) {
+    if (event.target.checked === true) {
+      this.selectedIds.push({ name: fileinfo.filename });
+    }
+    if (event.target.checked === false) {
+      this.selectedIds = this.selectedIds.filter((item) => item.name !== fileinfo.filename);
+    }
+    console.log(this.selectedIds);
+  }
+  Process() {
+    this.fservice.process(this.selectedIds).subscribe(result => {
+      console.log(result['Message'])
+      /* if (result['Message'] == 'Sucessfully deleted files') {
+        alert('Sucessfully deleted files')
+        this.getAllContracts();
+      } */
+    });
   }
 }

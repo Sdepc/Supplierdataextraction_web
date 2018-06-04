@@ -30,4 +30,8 @@ export class FilesService {
     let url = `${this.API_URL}/summary/purge?days=`+days;
     return this.http.post(url, data);
   }
+  public process(data) {
+    let url = `${this.API_URL}/processed/pythonscripts`;
+    return this.http.post(url, data);
+  }
 }
