@@ -1,112 +1,97 @@
-<!-- <app-steps [steps]="steps"></app-steps> -->
-<div class="row mTop10">
-  <div class="col-md-12 col-lg-12">
-
-    <div class="secondary-tabs ">
-
-      <ul class="tabs st">
-        <li id="tab-dashboard" class="tab active">
-          <a>
-            <div class="tab__heading text-large" title="Home">Update & Process</div>
-          </a>
-        </li>
-        <li id="tab-review" class="tab ">
-          <a>
-            <div class="tab__heading text-large" title="Performance">Summary</div>
-          </a>
-        </li>
-
-
-      </ul>
-
-      <div class="tab-content">
-        <div id="tab-dashboard-content" class="tab-pane active">
-          <div>
-
-            <div class="row mTop10">
-              <div class="col-md-12 col-lg-12">
-                <h3>Bulk File Upload</h3>
-                <span class="text-small ">
-                  <span class="icon-info-circle icon-tiny qtr-padding-right text-info"></span>Upload only PDF and image file formats(.jpg, .png) </span>
-              </div>
-            </div>
-
-
-
-            <div class="row">
-
-              <div class="col-md-9  col-lg-8">
-                <input #uploadfile id="uploadfile" name="uploadfile" class="custom-file-input" type="file" (change)="fileChangeEvent($event)"
-                  placeholder="Upload a file..." multiple/>
-              </div>
-              <div class="col-md-3 col-lg-4">
-                <button type="button" class="btn btn--primary m5" (click)="upload()">Upload</button>
-                <button class="btn" (click)="reset()">Reset</button>
-              </div>
-
-            </div>
-            <div class="row mTop25">
-              <div class="col-md-12 col-lg-12">
-                <div>
-                  <span class="text-medium text-bold">Uploaded Files</span>
-                </div>
-                <div class="responsive-table">
-                  <table class="table table--bordered table--loose table--hover table--nostripes">
-                    <thead>
-                      <tr class="greyBg">
-                        <th>
-                          <label class="checkbox">
-                            <input type="checkbox" />
-                            <span class="checkbox__input"></span>
-                          </label>
-                        </th>
-                        <th>File Name</th>
-                        <th>Uploaded by</th>
-                        <th>Date of Upload</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr class="ht55" *ngFor="let file of files">
-                        <td>
-                          <label class="checkbox">
-                            <input type="checkbox" name="item-{{file}}" #myItem (change)="OnCheckboxSelect(file, $event)">
-                            <span class="checkbox__input"></span>
-                          </label>
-                        </td>
-                        <td>
-                          <a href="#">{{file.filename}}</a>
-                        </td>
-                        <td>{{file.uploaded_by}}</td>
-                        <td>{{file.date_of_upload | date}}</td>
-                        <td [ngClass]="{
-                          'text-secondary':file.status === 'To be Processed',
-                          'text-danger':file.status === 'Process Failed'
-                        }">{{file.status}}</td>
-                        <td class="cm_align blueCol">
-                          <span class="icon-trash icon-small text-danger"></span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div class="row mTop10">
-              <div class="col-md-12">
-                <div class="cm_align">
-                  <button class="btn btn--primary m5" (click)="Process()">Process Files</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="tab-review-content" class="tab-pane ">
-          <app-summary-page></app-summary-page>
-        </div>
+<div>
+  <br>
+  <div class="col-md-12" *ngIf="successMessageAlert">
+    <div class="alert alert--success">
+      <div class="alert__icon icon-check-outline"></div>
+      <div class="alert__message">{{successMessage}}</div>
+      <a href="javascript:;" class="alert__close icon-close"></a>
+    </div>
+  </div>
+  <div class="col-md-12" *ngIf="loading">
+    <div class="loading-spinner flex-center" aria-label="Loading, please wait..." tabindex="0">
+      <div class="wrapper">
+        <div class="wheel"></div>
       </div>
     </div>
   </div>
+  <div class="row mTop10">
+    <div class="col-md-12 col-lg-12">
+      <h3>Bulk File Upload</h3>
+      <span class="text-small ">
+        <span class="icon-info-circle icon-tiny qtr-padding-right text-info"></span>Upload only PDF and image file formats(.jpg, .png) </span>
+    </div>
+  </div>
 
+
+
+  <div class="row">
+
+    <div class="col-md-9  col-lg-8">
+      <input #uploadfile id="uploadfile" name="uploadfile" class="custom-file-input" type="file" (change)="fileChangeEvent($event)"
+        placeholder="Upload a file..." multiple/>
+    </div>
+    <div class="col-md-3 col-lg-4">
+      <button type="button" class="btn btn--primary m5" (click)="upload()">Upload</button>
+      <button class="btn" (click)="reset()">Reset</button>
+    </div>
+
+  </div>
+  <div class="row mTop25">
+    <div class="col-md-12 col-lg-12">
+      <div>
+        <span class="text-medium text-bold">Uploaded Files</span>
+      </div>
+      <div class="responsive-table">
+        <table class="table table--bordered table--loose table--hover table--nostripes">
+          <thead>
+            <tr class="greyBg">
+              <th>
+                <label class="checkbox">
+                  <input type="checkbox" />
+                  <span class="checkbox__input"></span>
+                </label>
+              </th>
+              <th>File Name</th>
+              <th>Uploaded by</th>
+              <th>Date of Upload</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="ht55" *ngFor="let file of files">
+              <td>
+                <label class="checkbox">
+                  <input type="checkbox" name="item-{{file}}" #myItem (change)="OnCheckboxSelect(file, $event)" [disabled]="file.status === 'In_process'">
+                  <span class="checkbox__input"></span>
+                </label>
+              </td>
+              <td>
+                <a>{{file.filename}}</a>
+              </td>
+              <td>{{file.uploaded_by}}</td>
+              <td>{{file.date_of_upload | date}}</td>
+              <td [ngClass]="{
+                  'text-secondary':file.status === 'To be Processed',
+                  'text-danger':file.status === 'Process Failed'
+                }">{{file.status}}</td>
+              <td class="cm_align blueCol">
+                <a (click)="delete()"> 
+                  <span class="icon-trash icon-small text-danger"></span>
+                </a>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row mTop10">
+    <div class="col-md-12">
+      <div class="cm_align">
+        <button class="btn btn--primary m5" (click)="Process()">Process Files</button>
+      </div>
+    </div>
+  </div>
 </div>

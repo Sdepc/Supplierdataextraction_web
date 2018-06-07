@@ -12,9 +12,13 @@ export class HomeComponent implements OnInit {
   @ViewChild('uploadfile') myInputVariable: ElementRef;
   filesToUpload: Array<File> = [];
   selectedIds = [];
+  loading: boolean = false;
+  successMessageAlert = false;
+  successMessage: any;
   constructor(private fservice: FilesService, private http: HttpClient) { }
 
   ngOnInit() {
+    this.loading = false;
     this.getAllFiles();
   }
   getAllFiles() {
@@ -30,9 +34,10 @@ export class HomeComponent implements OnInit {
     for (let i = 0; i < files.length; i++) {
       formData.append("uploads[]", files[i], files[i]['name']);
     }
-    console.log('pardhu' + formData)
     this.fservice.filesUpload(formData).subscribe(data => {
-      alert('File(s) uploaded successfully')
+      this.successMessageAlert=true;
+      this.successMessage="File(s) uploaded successfully"
+      //alert('File(s) uploaded successfully')
       this.reset();
       this.getAllFiles();
     });
@@ -55,12 +60,20 @@ export class HomeComponent implements OnInit {
     console.log(this.selectedIds);
   }
   Process() {
+    this.loading = true;
     this.fservice.process(this.selectedIds).subscribe(result => {
+      console.log(result);
       console.log(result['Message'])
-      /* if (result['Message'] == 'Sucessfully deleted files') {
-        alert('Sucessfully deleted files')
-        this.getAllContracts();
-      } */
+      if (result['Message'] == 'Success') {
+
+        alert('Sucessfully processed selected files')
+        this.loading = false;
+        this.getAllFiles();
+      }
     });
+  }
+  delete()
+  {
+    alert('Sucessfully deleted selected file')
   }
 }
