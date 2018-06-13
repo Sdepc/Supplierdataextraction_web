@@ -25,7 +25,7 @@ export class FilesService {
   public filesUpload(postdata) {
     console.log('POST');
     console.log(postdata);
-    let url = `${this.API_URL}/files/upload?username=Ramu Tubati`;
+    let url = `${this.API_URL}/files/upload?username=Admin`;
     return this.http.post(url, postdata);
   }
   public purge(data,days) {
