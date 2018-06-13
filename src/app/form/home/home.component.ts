@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
   files: any;
+  messagedata: any;
   @ViewChild('uploadfile') myInputVariable: ElementRef;
   filesToUpload: Array<File> = [];
   selectedIds = [];
@@ -21,11 +22,13 @@ export class HomeComponent implements OnInit {
     this.loading = false;
     this.selectedIds = [];
     this.filesToUpload = [];
+    this.messagedata = [];
     this.getAllFiles();
+
   }
   getAllFiles() {
     this.fservice.getFiles().subscribe(data => {
-      this.files = data["files"];
+      this.files = data;
     });
   }
 
@@ -36,9 +39,26 @@ export class HomeComponent implements OnInit {
       formData.append("uploads[]", files[i], files[i]['name']);
     }
     this.fservice.filesUpload(formData).subscribe(data => {
+      this.messagedata = data;
       // this.successMessageAlert=true;
       //this.successMessage="File(s) uploaded successfully"
-      alert('File(s) uploaded successfully')
+      console.log(this.messagedata);
+      for (let i = 0; i < this.messagedata.length; i++) {
+        console.log(this.messagedata[i]);
+        let key;
+        for (key in this.messagedata[i]) {
+          if (this.messagedata[i].hasOwnProperty(key)) {
+            if (key === "Error_File_Name") {
+              console.log(this.messagedata[i]['Error_File_Name']);
+              alert(this.messagedata[i]['Error_File_Name'] + " - File already exists")
+            }
+            if (key === "Success_File_Name") {
+              console.log(this.messagedata[i]['Success_File_Name']);
+              alert(this.messagedata[i]['Success_File_Name'] + " - File has been uploaded successfully ")
+            }
+          }
+        }
+      }
       this.reset();
       this.getAllFiles();
     });
@@ -61,18 +81,14 @@ export class HomeComponent implements OnInit {
     console.log(this.selectedIds);
   }
   Process() {
-    this.loading = true;
-    console.log(this.selectedIds);
     this.fservice.process(this.selectedIds).subscribe(result => {
-      console.log(result);
-      console.log(result['Message'])
-      if (result['Message'] == 'Success') {
-
+      /* if (result['Message'] == 'Success') {
         alert('Sucessfully processed selected files')
         this.loading = false;
         this.getAllFiles();
-      }
+      } */
     });
+    this.getAllFiles();
   }
   delete() {
     alert('Sucessfully deleted selected file')
