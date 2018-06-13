@@ -19,10 +19,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.loading = false;
+    this.selectedIds = [];
+    this.filesToUpload = [];
     this.getAllFiles();
   }
   getAllFiles() {
-    console.log('all file');
     this.fservice.getFiles().subscribe(data => {
       this.files = data["files"];
     });
@@ -35,9 +36,9 @@ export class HomeComponent implements OnInit {
       formData.append("uploads[]", files[i], files[i]['name']);
     }
     this.fservice.filesUpload(formData).subscribe(data => {
-      this.successMessageAlert=true;
-      this.successMessage="File(s) uploaded successfully"
-      //alert('File(s) uploaded successfully')
+      // this.successMessageAlert=true;
+      //this.successMessage="File(s) uploaded successfully"
+      alert('File(s) uploaded successfully')
       this.reset();
       this.getAllFiles();
     });
@@ -61,6 +62,7 @@ export class HomeComponent implements OnInit {
   }
   Process() {
     this.loading = true;
+    console.log(this.selectedIds);
     this.fservice.process(this.selectedIds).subscribe(result => {
       console.log(result);
       console.log(result['Message'])
@@ -72,8 +74,7 @@ export class HomeComponent implements OnInit {
       }
     });
   }
-  delete()
-  {
+  delete() {
     alert('Sucessfully deleted selected file')
   }
 }

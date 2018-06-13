@@ -23,6 +23,8 @@ export class FilesService {
     return this.http.get(url);
   }
   public filesUpload(postdata) {
+    console.log('POST');
+    console.log(postdata);
     let url = `${this.API_URL}/files/upload?username=Ramu Tubati`;
     return this.http.post(url, postdata);
   }

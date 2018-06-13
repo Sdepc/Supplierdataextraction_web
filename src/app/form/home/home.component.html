@@ -18,7 +18,7 @@
     <div class="col-md-12 col-lg-12">
       <h3>Bulk File Upload</h3>
       <span class="text-small ">
-        <span class="icon-info-circle icon-tiny qtr-padding-right text-info"></span>Upload only PDF and image file formats(.jpg, .png) </span>
+        <span class="icon-info-circle icon-tiny qtr-padding-right text-info"></span>Upload only PDF file </span>
     </div>
   </div>
 
@@ -28,7 +28,7 @@
 
     <div class="col-md-9  col-lg-8">
       <input #uploadfile id="uploadfile" name="uploadfile" class="custom-file-input" type="file" (change)="fileChangeEvent($event)"
-        placeholder="Upload a file..." multiple/>
+        placeholder="Upload a file..." multiple  accept=".pdf"/>
     </div>
     <div class="col-md-3 col-lg-4">
       <button type="button" class="btn btn--primary m5" (click)="upload()">Upload</button>
@@ -46,10 +46,7 @@
           <thead>
             <tr class="greyBg">
               <th>
-                <label class="checkbox">
-                  <input type="checkbox" />
-                  <span class="checkbox__input"></span>
-                </label>
+                
               </th>
               <th>File Name</th>
               <th>Uploaded by</th>
