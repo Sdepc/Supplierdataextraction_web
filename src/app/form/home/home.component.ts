@@ -88,7 +88,11 @@ export class HomeComponent implements OnInit {
         this.getAllFiles();
       } */
     });
-    this.getAllFiles();
+    setTimeout(() => {
+      console.log('3 seconds are over!');
+      this.getAllFiles();
+    }, 3000);
+
   }
   delete() {
     alert('Sucessfully deleted selected file')
