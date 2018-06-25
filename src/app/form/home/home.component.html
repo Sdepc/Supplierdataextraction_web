@@ -16,7 +16,7 @@
   </div>
   <div class="row mTop10">
     <div class="col-md-12 col-lg-12">
-      <h3>Bulk File Upload</h3>
+      <h3>File Upload</h3>
       <span class="text-small ">
         <span class="icon-info-circle icon-tiny qtr-padding-right text-info"></span>Upload only PDF file </span>
     </div>
@@ -28,7 +28,7 @@
 
     <div class="col-md-9  col-lg-8">
       <input #uploadfile id="uploadfile" name="uploadfile" class="custom-file-input" type="file" (change)="fileChangeEvent($event)"
-        placeholder="Upload a file..."   accept=".pdf"/>
+        placeholder="Upload a file..." accept=".pdf" />
     </div>
     <div class="col-md-3 col-lg-4">
       <button type="button" class="btn btn--primary m5" (click)="upload()">Upload</button>
@@ -46,7 +46,7 @@
           <thead>
             <tr class="greyBg">
               <th>
-                
+
               </th>
               <th>File Name</th>
               <th>Uploaded by</th>
@@ -56,8 +56,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="ht55" *ngFor="let file of files">
-              <td>
+            <tr class="ht55" *ngFor="let file of files" [ngClass]="{
+              'stext-danger':file.status === 'In_process'
+            }">
+              <td >
                 <label class="checkbox">
                   <input type="checkbox" name="item-{{file}}" #myItem (change)="OnCheckboxSelect(file, $event)" [disabled]="file.status === 'In_process'">
                   <span class="checkbox__input"></span>
@@ -73,7 +75,7 @@
                   'text-danger':file.status === 'Process Failed'
                 }">{{file.status}}</td>
               <td class="cm_align blueCol">
-                <a (click)="delete()"> 
+                <a (click)="delete(file, $event)">
                   <span class="icon-trash icon-small text-danger"></span>
                 </a>
 

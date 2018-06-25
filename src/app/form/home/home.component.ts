@@ -91,10 +91,17 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       console.log('3 seconds are over!');
       this.getAllFiles();
-    }, 3000);
+    }, 2000);
 
   }
-  delete() {
-    alert('Sucessfully deleted selected file')
+  delete(value) {
+    this.fservice.deletefile(value.filename).subscribe(result => {
+      console.log(result);
+       if (result == '1') {
+        alert('Sucessfully processed selected files')
+        this.getAllFiles();
+      } 
+    });
+    
   }
 }

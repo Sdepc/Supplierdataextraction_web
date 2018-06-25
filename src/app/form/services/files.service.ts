@@ -11,15 +11,15 @@ export class FilesService {
   constructor(private http: HttpClient) { }
 
   public getFiles() {
-	  let url = `${this.API_URL}/files/getfilescontent`;
+    let url = `${this.API_URL}/files/getfilescontent`;
     return this.http.get(url);
   }
   public getAllContracts() {
-	  let url = `${this.API_URL}/summary/contractnames`;
+    let url = `${this.API_URL}/summary/contractnames`;
     return this.http.get(url);
   }
   public getContractdata(name) {
-	  let url = `${this.API_URL}/summary/contractcontent?filename=`+name;
+    let url = `${this.API_URL}/summary/contractcontent?filename=` + name;
     return this.http.get(url);
   }
   public filesUpload(postdata) {
@@ -28,12 +28,16 @@ export class FilesService {
     let url = `${this.API_URL}/files/upload?username=Admin`;
     return this.http.post(url, postdata);
   }
-  public purge(data,days) {
-    let url = `${this.API_URL}/summary/purge?days=`+days;
+  public purge(data, days) {
+    let url = `${this.API_URL}/summary/purge?days=` + days;
     return this.http.post(url, data);
   }
   public process(data) {
     let url = `${this.API_URL}/processed/pythonscripts`;
     return this.http.post(url, data);
+  }
+  public deletefile(name) {
+    let url = `${this.API_URL}/files/deletefile?fname=` + name;
+    return this.http.post(url,null);
   }
 }
