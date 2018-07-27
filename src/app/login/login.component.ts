@@ -10,6 +10,7 @@ import { FilesService } from '../form/services/files.service';
 export class LoginComponent implements OnInit {
   userID: any;
   Password: any;
+  loginData:any;
   constructor(private service: FilesService, private router: Router) { }
 
   ngOnInit() {
@@ -17,11 +18,11 @@ export class LoginComponent implements OnInit {
     localStorage.removeItem('lastname');
   }
   onSubmit(form: any) {
-    this.service.authenticate(form.userid, form.password).subscribe(logindata => {
-      if (form.userid === logindata[0].username && form.password === logindata[0].password) {
-        localStorage.setItem('firstname', logindata[0].firstname);
-        localStorage.setItem('lastname', logindata[0].lastname);
-        localStorage.setItem('userid', logindata[0].username);
+    this.service.authenticate(form.userid, form.password).subscribe(result => {
+      this.loginData=result;
+      if (this.loginData.length > 0) {
+        localStorage.setItem('firstname', this.loginData.description);
+        localStorage.setItem('userid', this.loginData.mail);
         this.router.navigate(['home']);
       }
       else {

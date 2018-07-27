@@ -8,8 +8,6 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   login = false;
   firstname: any;
-  lastname: any;
-  isAdmin = false;
   userid: any;
   constructor() { }
 
@@ -17,7 +15,6 @@ export class HeaderComponent implements OnInit {
     if (localStorage.getItem('userid')) {
       this.login = true;
       this.firstname = localStorage.getItem('firstname');
-      this.lastname = localStorage.getItem('lastname');
       this.userid = localStorage.getItem('userid');
 
     }

@@ -41,6 +41,8 @@ export class FilesService {
     return this.http.post(url, null);
   }
   public authenticate(userid, password) {
-    return this.http.get("./assets/api/User.json")
+    let data = { "userName": userid, "password": password }
+    let url = "http://64.102.179.170:8080/scde-api/user/authentication";
+    return this.http.post(url, data);
   }
 }
