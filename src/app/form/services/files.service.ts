@@ -25,7 +25,7 @@ export class FilesService {
   public filesUpload(postdata) {
     console.log('POST');
     console.log(postdata);
-    let url = `${this.API_URL}/files/upload?username=Admin`;
+    let url = `${this.API_URL}/files/upload?username=` + localStorage.getItem('userid');
     return this.http.post(url, postdata);
   }
   public purge(data, days) {
@@ -38,6 +38,9 @@ export class FilesService {
   }
   public deletefile(name) {
     let url = `${this.API_URL}/files/deletefile?fname=` + name;
-    return this.http.post(url,null);
+    return this.http.post(url, null);
+  }
+  public authenticate(userid, password) {
+    return this.http.get("./assets/api/User.json")
   }
 }

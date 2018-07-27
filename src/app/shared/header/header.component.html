@@ -8,11 +8,12 @@
               <h1 class="page-title">Supplier Contract Data Extraction</h1>
           </div>
       </div>
-      <div class="header-toolbar">
-      
-        
-        <!-- <a class="avatar mLeft15" >Ramu Tubati</a>
-        <a href="#" >[ Logout ]</a> -->
+      <div class="header-toolbar" *ngIf="login">
+        <span class="avatar mLeft15">
+          <img class="thumb thumb--small" src="http://wwwin.cisco.com/dir/photo/zoom/{{userid}}.jpg">
+        </span>
+        <a class="avatar mLeft15">{{firstname}} {{lastname}}</a>
+        <a href="#/login">[ Logout ]</a>
       </div>
   </div>
 </header>

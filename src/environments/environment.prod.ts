@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-   apiUrl: 'https://supplierbackend.herokuapp.com/'
+   apiUrl: 'http://64.102.179.170:3000'
 };

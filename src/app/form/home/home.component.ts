@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FilesService } from '../services/files.service';
 import { HttpClient } from '@angular/common/http';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,14 +16,19 @@ export class HomeComponent implements OnInit {
   loading: boolean = false;
   successMessageAlert = false;
   successMessage: any;
-  constructor(private fservice: FilesService, private http: HttpClient) { }
+  constructor(private fservice: FilesService, private http: HttpClient,private router: Router) { }
 
   ngOnInit() {
+    if (localStorage.getItem('firstname')) {
     this.loading = false;
     this.selectedIds = [];
     this.filesToUpload = [];
     this.messagedata = [];
     this.getAllFiles();
+    }
+    else {
+      this.router.navigate(['login']);
+    }
 
   }
   getAllFiles() {

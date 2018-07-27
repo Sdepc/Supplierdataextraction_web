@@ -1,78 +1,95 @@
-
+<app-header></app-header>
+<div class="row mTop10">
+  <div class="col-md-12 col-lg-12">
+    <div class="secondary-tabs ">
+      <ul class="tabs st">
+        <li id="tab-dashboard" routerLinkActive="tab active">
+          <a routerLink="/home">
+            <div class="tab__heading text-large" title="Home">Update & Process</div>
+          </a>
+        </li>
+        <li id="tab-review" routerLinkActive="tab active">
+          <a routerLink="/summary">
+            <div class="tab__heading text-large" title="Performance">Summary</div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
 <div class="row">
+  <div class="col-md-5">
+    <h5 class="pt8pc">Summary</h5>
+  </div>
+  <div class="col-md-7">
+    <div class="text-right">
+      <button class="btn pb-color " (click)="purge()">
+        <span class="icon-trash icon-small"></span> PURGE</button>
+      <br>
+      <label class="checkbox">
+        <input type="checkbox" name="ckbpurge" [(ngModel)]="ckbpurge">
+        <span class="checkbox__input"></span>
+        <span class="checkbox__label">Files older than 30 days</span>
+      </label>
 
-    <div class="col-md-5">
-        <h5 class="pt8pc">Summary</h5>
     </div>
-    <div class="col-md-7">
-        <div class="text-right">
-            <button class="btn pb-color " (click)="purge()">
-                <span class="icon-trash icon-small"></span> PURGE</button>
-            <br>
-            <label class="checkbox">
-                <input type="checkbox" name="ckbpurge" [(ngModel)]="ckbpurge" >
-                <span class="checkbox__input"></span>
-                <span class="checkbox__label">Files older than 30 days</span>
-            </label>
-
-        </div>
-    </div>
+  </div>
 </div>
 <div class="mTop15">
-    <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all ui-tabs-vertical">
-        <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+  <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all ui-tabs-vertical">
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
 
-            <li *ngFor="let Contract of AllContracts;let i = index;let firstItem = first;" (click)="liClicked(Contract)" id="tab-{{i}}"
-                class="ui-state-default ui-corner-top vtabs" [ngClass]="{ 'ui-tabs-active ui-state-active vactive': firstItem }"
-                role="tab" tabindex="0" aria-controls="tabs-1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true">
-                <div class="flex-inline">
-                    <div>
-                        <label class="checkbox">
-                            <input type="checkbox" name="item-{{Contract}}" #myItem (change)="OnCheckboxSelect(Contract, $event)">
-                            <span class="checkbox__input"></span>
-                        </label>
-                    </div>
-                    <div>
-                        <a class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">
-                            <span class="text-large">{{Contract}}</span>
-                        </a>
+      <li *ngFor="let Contract of AllContracts;let i = index;let firstItem = first;" (click)="liClicked(Contract)" id="tab-{{i}}"
+        class="ui-state-default ui-corner-top vtabs" [ngClass]="{ 'ui-tabs-active ui-state-active vactive': firstItem }" role="tab"
+        tabindex="0" aria-controls="tabs-1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true">
+        <div class="flex-inline">
+          <div>
+            <label class="checkbox">
+              <input type="checkbox" name="item-{{Contract}}" #myItem (change)="OnCheckboxSelect(Contract, $event)">
+              <span class="checkbox__input"></span>
+            </label>
+          </div>
+          <div>
+            <a class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">
+              <span class="text-large">{{Contract}}</span>
+            </a>
 
-                    </div>
+          </div>
 
-                </div>
-
-
-
-            </li>
-        </ul>
-        <div *ngFor="let Contract of AllContracts;let i = index;let firstItem = first;">
-            <div id="tab-{{i}}-vcontent" aria-labelledby="ui-id-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom vtab-pane vactive"
-                [ngClass]="{ 'vactive': firstItem }" role="tabpanel" aria-hidden="false">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="pull-left">
-                            <div>
-                                <b>Contract and Discount Summary</b>
-                            </div>
-                        </div>
-                        <div class="pull-right legends">
-                            <div class="blueLegend qtr-padding-right"></div>
-                            <div class="qtr-padding-left">Contract Info</div>
-                            <div class="greenLegend half-padding-right half-margin-left"></div>
-                            <div class="qtr-padding-left">Price/Discount Info</div>
-                            <div class="whiteLegend half-padding-right half-margin-left"></div>
-                            <div class="qtr-padding-left">Related Info</div>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="vsContent" [innerHTML]="Contentdata"></div>
-                    </div>
-                </div>
-            </div>
         </div>
 
+
+
+      </li>
+    </ul>
+    <div *ngFor="let Contract of AllContracts;let i = index;let firstItem = first;">
+      <div id="tab-{{i}}-vcontent" aria-labelledby="ui-id-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom vtab-pane vactive"
+        [ngClass]="{ 'vactive': firstItem }" role="tabpanel" aria-hidden="false">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="pull-left">
+              <div>
+                <b>Contract and Discount Summary</b>
+              </div>
+            </div>
+            <div class="pull-right legends">
+              <div class="blueLegend qtr-padding-right"></div>
+              <div class="qtr-padding-left">Contract Info</div>
+              <div class="greenLegend half-padding-right half-margin-left"></div>
+              <div class="qtr-padding-left">Price/Discount Info</div>
+              <div class="whiteLegend half-padding-right half-margin-left"></div>
+              <div class="qtr-padding-left">Related Info</div>
+
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="vsContent" [innerHTML]="Contentdata"></div>
+          </div>
+        </div>
+      </div>
     </div>
+
+  </div>
 </div>

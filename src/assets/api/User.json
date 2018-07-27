@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "username": "pgajula",
+        "password": "pgajula@123",
+        "firstname": "Partha Saradhi",
+        "lastname": "Gajula"
+    },
+    {
+        "id": 1,
+        "username": "ratubati",
+        "password": "ratubati@123",
+        "firstname": "Ramu",
+        "lastname": "Tubati"
+    }
+   
+]

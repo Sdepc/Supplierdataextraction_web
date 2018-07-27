@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChildren } from '@angular/core';
 import { FilesService } from '../services/files.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-summary-page',
@@ -12,19 +13,24 @@ export class SummaryPageComponent implements OnInit {
   AllContracts: any;
   selectedIds = [];
   @ViewChildren('myItem') item;
-  constructor(private fservice: FilesService) { }
+  constructor(private fservice: FilesService,private router: Router) { }
 
   ngOnInit() {
-    this.getAllContracts();
+    if (localStorage.getItem('firstname')) {
+      this.getAllContracts();
+    }
+    else {
+      this.router.navigate(['login']);
+    }
   }
   getAllContracts() {
-    this.AllContracts=[];
+    this.AllContracts = [];
     this.fservice.getAllContracts().subscribe(data => {
       this.AllContracts = data;
       console.log(this.AllContracts);
       //undefined
-      if(this.AllContracts.length > 0){
-      this.getContentdata(this.AllContracts[0])
+      if (this.AllContracts.length > 0) {
+        this.getContentdata(this.AllContracts[0])
       }
     });
   }

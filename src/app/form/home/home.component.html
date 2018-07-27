@@ -1,3 +1,22 @@
+<app-header></app-header>
+<div class="row mTop10">
+  <div class="col-md-12 col-lg-12">
+    <div class="secondary-tabs ">
+      <ul class="tabs st">
+        <li id="tab-dashboard" routerLinkActive="tab active">
+          <a routerLink="/home">
+            <div class="tab__heading text-large" title="Home">Update & Process</div>
+          </a>
+        </li>
+        <li id="tab-review" routerLinkActive="tab active">
+          <a routerLink="/summary">
+            <div class="tab__heading text-large" title="Performance">Summary</div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
 <div>
   <br>
   <div class="col-md-12" *ngIf="successMessageAlert">

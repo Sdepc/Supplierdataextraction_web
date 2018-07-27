@@ -1,0 +1,9 @@
+.login-nbg {
+    background: linear-gradient(to bottom, #024d68, #b2b2b2) no-repeat center center fixed !important;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100% ;
+    height: -webkit-fill-available ;
+}
