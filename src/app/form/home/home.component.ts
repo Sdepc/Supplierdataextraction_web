@@ -16,15 +16,20 @@ export class HomeComponent implements OnInit {
   loading: boolean = false;
   successMessageAlert = false;
   successMessage: any;
-  constructor(private fservice: FilesService, private http: HttpClient,private router: Router) { }
+  interval: any;
+   constructor(private fservice: FilesService, private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
     if (localStorage.getItem('firstname')) {
-    this.loading = false;
-    this.selectedIds = [];
-    this.filesToUpload = [];
-    this.messagedata = [];
-    this.getAllFiles();
+      this.loading = false;
+      this.selectedIds = [];
+      this.filesToUpload = [];
+      this.messagedata = [];
+      this.getAllFiles();
+      this.interval = setInterval(() => {
+        this.getAllFiles();
+      }, 60000);
+
     }
     else {
       this.router.navigate(['login']);
@@ -34,6 +39,7 @@ export class HomeComponent implements OnInit {
   getAllFiles() {
     this.fservice.getFiles().subscribe(data => {
       this.files = data;
+      console.log('1 min are over!');
     });
   }
 
@@ -102,11 +108,11 @@ export class HomeComponent implements OnInit {
   delete(value) {
     this.fservice.deletefile(value.filename).subscribe(result => {
       console.log(result);
-       if (result == '1') {
+      if (result == '1') {
         alert('Sucessfully processed selected files')
         this.getAllFiles();
-      } 
+      }
     });
-    
+
   }
 }
